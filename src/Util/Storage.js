@@ -163,7 +163,7 @@ var Storage = cc.Class.extend(
         }
     },
 
-    invokeSDK2 : function(message) 
+    invokeSDK2 : function() 
     {
         if ("undefined" == typeof(sdkbox)) {
             console.log("sdkbox is not exist")
@@ -172,8 +172,13 @@ var Storage = cc.Class.extend(
 
         if ("undefined" != typeof(sdkbox.PluginShare)) {
             console.log('share post')
-            var plugin = sdkbox.PluginShare
-            plugin.share( {text : message} );
+            var plugin = sdkbox.PluginShare;
+            if(this.totalGameScore == 0)
+            {
+                plugin.share( {text : "Phoneアプリ『ネコダン』を始めたニャ！! https://itunes.apple.com/us/app/id1084127955"} );
+            }else{
+                plugin.share( {text : "Phoneアプリ『ネコダン』で" + this.totalGameScore + "匹集めたニャ！! https://itunes.apple.com/us/app/id1084127955"} );
+            }
         } else {
             console.log("no plugin invoked")
         }

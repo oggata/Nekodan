@@ -143,7 +143,7 @@ var TopLayer = cc.Layer.extend(
         {
             this.isShareVisible = false;
             playSE_Button(this.storage);
-            this.storage.invokeSDK2("Phoneアプリ『ネコダン』で、" + this.storage.totalGameScore + "匹集めたにゃー | https://itunes.apple.com/us/app/id1084127955");
+            this.storage.invokeSDK2();
         }, this);
         tweetButton.setAnchorPoint(0.5, 0.5);
         tweetButton.setPosition(300, 50);
@@ -151,7 +151,12 @@ var TopLayer = cc.Layer.extend(
         menu001.setPosition(0, 0);
         this.shareContent.addChild(menu001);
 
-        this.scoreLabel = cc.LabelTTF.create("「" + this.storage.totalGameScore + "匹、集めたにゃー」", "Arial", 35);
+        if(this.storage.totalGameScore == 0)
+        {
+            this.scoreLabel = cc.LabelTTF.create("「ネコダン始めたニャ！」", "Arial", 35);
+        }else{
+            this.scoreLabel = cc.LabelTTF.create("「" + this.storage.totalGameScore + "匹、集めたニャ」", "Arial", 35);
+        }
         this.scoreLabel.setFontFillColor(new cc.Color(250, 250, 250, 255));
         this.scoreLabel.enableStroke(new cc.Color(0, 0, 0, 255), 2, false);
         this.scoreLabel.setPosition(300, 130);
