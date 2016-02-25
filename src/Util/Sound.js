@@ -15,6 +15,16 @@ var playBGM = function(storage){
     }
 };
 
+var playClearBGM = function(storage){
+    //BGM_clear_mp3
+    if(storage.bgmVolume != 0)
+    {
+        var audioEngine = cc.audioEngine;
+        audioEngine.stopMusic();
+        audioEngine.playMusic(res.BGM_clear_mp3,false); //BGM
+    }
+};
+
 var stopBGM = function(storage){
     var audioEngine = cc.audioEngine;
     audioEngine.stopMusic();

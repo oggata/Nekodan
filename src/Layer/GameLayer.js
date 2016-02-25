@@ -200,6 +200,18 @@ var GameLayer = cc.Layer.extend(
         this.fence001.setAnchorPoint(0,0);
         this.fence001.setPosition(this.fencePosX,800-50);
 
+        this.sumCombo = 0;
+        this.comboCnt = 0;
+        this.comboTime = 0;
+        this.comboLabel = cc.LabelTTF.create("5", "Arial", 37);
+        this.comboLabel.setFontFillColor(new cc.Color(250, 250, 250, 255));
+        this.comboLabel.enableStroke(new cc.Color(192, 192, 192, 255), 4, false);
+        this.comboPng = cc.Sprite.create( res.Combo_png );
+        this.comboPng.setPosition(10,-4);
+        this.comboLabel.addChild(this.comboPng);
+        this.addChild(this.comboLabel);
+        this.comboLabel.setPosition(320,500);
+
         this.scheduleUpdate();
     },
     getReastAnimalCnt : function () 
@@ -317,8 +329,32 @@ var GameLayer = cc.Layer.extend(
         };
         return false;
     },
+
+    setCombo:function(posX,posY)
+    {
+        this.comboTime = 30 * 2;
+        this.comboCnt += 1;
+        this.comboLabel.setString(this.comboCnt + "");
+        this.comboLabel.setPosition(posX,posY);
+        //comboが5以上の場合は表示する
+    },
+
     update : function (dt) 
     {
+        this.comboTime-=1;
+        if(this.comboTime <= 0)
+        {
+            this.comboTime = 0;
+            this.comboCnt = 0;
+        }
+        if(this.comboCnt >= 2)
+        {
+            this.comboLabel.setVisible(true);
+
+        }else{
+            this.comboLabel.setVisible(false);
+        }
+
         this.countDownTime+=1;
         if(1 <= this.countDownTime && this.countDownTime <= 60)
         {

@@ -16,6 +16,9 @@ var StageLayer = cc.Layer.extend(
         this.viewSize = cc.director.getVisibleSize();
         this.storage = storage;
         playBGM(this.storage);
+
+        this.maxStageNum = 18;
+
         var _getData = this.storage.getDataFromStorage();
         cc.sys.localStorage.setItem("gameStorage", _getData);
         this.clearedStageData = this.storage.clearedStageData;
@@ -31,7 +34,6 @@ var StageLayer = cc.Layer.extend(
         this.girlSprite = cc.Sprite.create( res.Girl_png );
         //this.girlSprite.setAnchorPoint(0.5,0.5);
         this.girlPosY = 740;
-        //this.grilStartPosY = this.viewSize.height;
         this.girlSprite.setPosition(130,this.girlPosY);
         this.addChild(this.girlSprite);
 
@@ -142,9 +144,9 @@ var StageLayer = cc.Layer.extend(
         {
             if(this.setting.isVisible() == true){return;}
             this.stageListNum += 1;
-            if(this.stageListNum >= 2)
+            if(this.stageListNum >= 3)
             {
-                this.stageListNum = 2;
+                this.stageListNum = 3;
             }
         }, this);
         this.nextStageButton.setPosition(560, 320);
@@ -159,6 +161,7 @@ var StageLayer = cc.Layer.extend(
             }
         }, this);
         this.backStageButton.setPosition(80, 320);
+
         var menu002 = new cc.Menu( this.nextStageButton, this.backStageButton);
         menu002.setPosition(0, 0);
         this.backSprite.addChild(menu002);
@@ -239,7 +242,7 @@ var StageLayer = cc.Layer.extend(
     setStageButtons : function () 
     {
         //最大のステージ数は固定
-        for (var i = 1; i <= 13; i++) 
+        for (var i = 1; i <= 20; i++) 
         {
             eval("this.stage" + ("00"+i).slice(-3) + " = new StageButtonSprite(this, " + i + ");");
             eval("this.stage" + ("00"+i).slice(-3) + ".setPosition(" + CONFIG.STAGE_POSITION[i][0] + "," + CONFIG.STAGE_POSITION[i][1] + ");");
@@ -365,6 +368,11 @@ var StageLayer = cc.Layer.extend(
         if(this.stageListNum == 2)
         {
             this.backStageButton.setVisible(true);
+            this.nextStageButton.setVisible(true);
+        }
+        if(this.stageListNum == 3)
+        {
+            this.backStageButton.setVisible(true);
             this.nextStageButton.setVisible(false);
         }
 
@@ -397,6 +405,24 @@ var StageLayer = cc.Layer.extend(
                 );
             }
             if(this.stageListNode.getPosition().x < -640)
+            {
+                this.stageListNode.setPosition(
+                    this.stageListNode.getPosition().x+=40,
+                    this.stageListNode.getPosition().y
+                );
+            }
+        }
+
+        if(this.stageListNum == 3)
+        {
+            if(this.stageListNode.getPosition().x > -640 * 2)
+            {
+                this.stageListNode.setPosition(
+                    this.stageListNode.getPosition().x-=40,
+                    this.stageListNode.getPosition().y
+                );
+            }
+            if(this.stageListNode.getPosition().x < -640 * 2)
             {
                 this.stageListNode.setPosition(
                     this.stageListNode.getPosition().x+=40,
@@ -456,9 +482,21 @@ var StageLayer = cc.Layer.extend(
             return 16;
         }
         if (maxClearedStage == 16) {
-            return 16;
+            return 20;
         }
-        return 16;
+        if (maxClearedStage == 17) {
+            return 20;
+        }
+        if (maxClearedStage == 18) {
+            return 20;
+        }
+        if (maxClearedStage == 19) {
+            return 20;
+        }
+        if (maxClearedStage == 20) {
+            return 20;
+        }
+        return 20;
     }
 });
 

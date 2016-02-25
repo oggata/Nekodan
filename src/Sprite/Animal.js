@@ -193,16 +193,19 @@ var Animal = cc.Node.extend(
         {
             if (this.isGoal == 0) 
             {
+                this.game.setCombo(this.getPosition().x,this.getPosition().y);
+
                 playSE_Sheep(this.game.storage);
                 this.isGoal = 1;
                 this.game.player.successCount += 1;
                 if (this.game.getReastAnimalCnt() == 0) {
-                    this.game.setMessage("達成!記録に挑戦.x" + 　this.game.player.successCount + "匹.");
+                    this.game.setMessage("成功! あと" + 　this.game.getReastAnimalCnt() + "匹.");
                 }
                 else {
                     this.game.setMessage("成功! あと" + 　this.game.getReastAnimalCnt() + "匹.");
                 }
                 this.game.addScore(1);
+                this.game.sumCombo += this.game.comboCnt;
                 this.game.addGoalEffect(this.getPosition().x, this.getPosition().y);
                 this.game.windowEffect001Cnt = 1;
             }

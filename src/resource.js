@@ -23,6 +23,7 @@ var res = {
     SE_Sheep_mp3 : "res/cat3.mp3",
     SE_Rotate_mp3 : "res/rotate.mp3",
     SE_Item_mp3 : "res/item.mp3",
+    BGM_clear_mp3 : "res/birdland1.mp3",
     Animal_001_png : "res/cat_001.png",
     Animal_002_png : "res/cat_002.png",
     Animal_003_png : "res/cat_003.png",
@@ -102,6 +103,7 @@ var res = {
     Twitter_Button_png : "res/tap_to_twitter.png",
     Share_Contents_png : "res/share_contents.png",
     Share_by_Twitter_png : "res/twitter_share.png",
+    Combo_png : "res/combo.png",
 };
 
 var g_resources = [];
